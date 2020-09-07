@@ -33,9 +33,10 @@ function BottomNav() {
     <BottomNavContainerStyle>
       <nav className="bottom-nav-container">
         <ul>
-          <BottomNavItem to="/" name ="home"/>
-          <BottomNavItem to="/about" name ="about"/>
-          <BottomNavItem to="/chat" name ="chat"/>
+          <BottomNavItem to="/board" name ="게시판"/>
+          <BottomNavItem to="/chat" name ="코치챗"/>
+          <BottomNavItem to="/about" name ="일단 어바웃"/>
+          <BottomNavItem to="/my" name ="내정보"/>
         </ul>
       </nav>
     </BottomNavContainerStyle>
