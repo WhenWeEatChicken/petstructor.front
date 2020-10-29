@@ -11,12 +11,12 @@ const HomeContainerStyle = styled.div`
 
 const HomeView = () => {
   return (
-    <div>
+    <>
       <h1> 홈 </h1>
       <HomeContainerStyle>
         로고 자리
       </HomeContainerStyle>
-    </div>
+    </>
   )
 }
 

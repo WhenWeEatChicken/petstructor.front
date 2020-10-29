@@ -1,43 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import { Form, Input, Button, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
-import axios from 'axios';
+const BoardCreate = (props) => {
+  const { onCreate } = props
+  
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
+  const [attachment, setAttachment] = useState(null);
 
-const BoardCreate = () => {
-  const tokenIs = () => {
-    return window.localStorage.getItem("Bearer_access_token") === null ? 
-    "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjksIm5hbWUiOiLtnZHsmrDsmrEiLCJpYXQiOjE2MDI1MDY0NTksImV4cCI6MTYwMjUxMzY1OX0.sI9VsqY77LIXfDesg36MiWYmZ1nnyqqr8knyZJGF9B4"
-    : 
-    window.localStorage.getItem("Bearer_access_token");
-  }
+  const handleChangeTitle = useCallback((e) => {
+    setTitle(e.target.value);
+  }, []);
 
-  const fetchBoardCreate = async () => {
-    const headers = {
-      'Content-type': 'multipart/form-data',
-      "Authorization": `Bearer ${tokenIs()}`,
-      "withCredentials": "true"
-    }
-    // const response = await axios.post(`http://52.231.101.140:8080/posts`, "", {"headers":headers});
-    let form = new FormData();
-    form.append("title", "sampleAt21:54");
-    form.append("contents", "sampleContentsAt21:54");
-    form.append("type", "QNA");
-    form.append("status", "Y");
-    const response = await axios.post(`http://52.231.101.140:8080/posts`, form, {headers});
-    // const response = await axios.post(`/posts`, "");
-    console.log("response", response);
-    // JSON.stringify(posts)
-    return response;
-  }
+  const handleChangeContents = useCallback((e) => {
+    setContents(e.target.value);
+  }, []);
+
+  const handleChangeAttachment = useCallback((file, fileList) => {
+    console.log(file)
+    setAttachment(file);
+  }, []);
+
+  // const normFile = (e) => {
+  //   console.log('Upload event:', e);
+  
+  //   if (Array.isArray(e)) {
+  //     return e;
+  //   }
+  
+  //   return e && e.fileList;
+  // };
+
+  const handleSubmit = useCallback((e) => {
+    onCreate(title, contents, attachment)
+  }, [title, contents, attachment, onCreate]);
+
 
   return (
-    <div>
-        title : <input type="text" name="title" /> <br/>
-        contents: <input type="text" name="contents" />  <br/>
-        <input type="hidden" name="publishDate" value="???"/>
-        <input type="hidden" name="type" value="QNA"/>
-        <button onClick={fetchBoardCreate} > 가즈아 </button>
-    </div>
+
+    <Form name="basic">
+      <Form.Item label="title" name="title" onChange={handleChangeTitle}
+        rules={[
+          { required: true, message: '제목을 적어주세요' },
+        ]}
+      >
+        <Input placeholder="제목을 적어주세요" />
+      </Form.Item>
+
+      <Form.Item label="contents" name="contents" onChange={handleChangeContents}
+        rules={[
+          { required: true, message: '내용을 적어주세요' },
+        ]}
+      >
+        <Input placeholder="내용을 적어주세요" />
+      </Form.Item>
+
+      <Form.Item name="attach" label="attach"
+        // valuePropName="fileList"
+      >
+        <Upload name="attach" beforeUpload={handleChangeAttachment}>
+          <Button icon={<UploadOutlined />}>파일 선택</Button>
+        </Upload>
+      </Form.Item>
+
+      <Form.Item>
+        <Button type="primary" onClick={handleSubmit} > {/* htmlType="submit" */}
+          Submit
+        </Button>
+      </Form.Item>
+
+      <input type="hidden" name="publishDate" value="???"/>
+      <input type="hidden" name="type" value="QNA"/>
+    </Form>
+
   );
 }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 
 import BottomNav from './components/nav/BottomNav';
+import AuthContainer from "./components/containers/AuthContainer"
+
 import Routes from './config/Routes';
 
 import styled from 'styled-components';
@@ -22,6 +24,7 @@ const App = () => {
         </div>
       </AppContainerStyle>
       <BottomNav />
+      <AuthContainer />
     </>
     
   )
