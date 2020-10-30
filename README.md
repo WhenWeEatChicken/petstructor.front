@@ -1,3 +1,10 @@
+## 반려동물 코칭 상담 사이트 Petstructor
+
+나의 소중한 반려동물을 위한 나만의 펫 인스트럭터 Petstructor  
+
+- 프론트엔드 소스  
+build with react.js by CRA
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
