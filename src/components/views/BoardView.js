@@ -28,8 +28,6 @@ const BoardView = (props) => {
   const { location } = props;
   const query = qs.parse(location, { ignoreQueryPrefix: true });
 
-  
-
   const sectionArticleSelector = (query) => {
     console.log("sectionArticleSelector",  query);
     switch(query.pathname){  

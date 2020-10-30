@@ -20,7 +20,7 @@ const cardSelect = (type, card_contents = "") => {
     case "profile": return <ProfileCard card_contents={card_contents} />;
     case "feedback": return <FeedbackCard card_contents={card_contents}/>;
     case "post": return <PostCard card_contents={card_contents}/>;
-    case "chatroom": return <ChatRoomCard card_contents={card_contents}/>
+    case "chatroom": return <ChatRoomCard card_contents={card_contents} />
     default: return null;
   }
 }

@@ -20,9 +20,7 @@ const BoardListContainer = () => {
     return null;
   }
 
-  return (
-    <> <BoardList posts={posts}/> </>
-  );
+  return <BoardList posts={posts}/>;
 }
 
 export default BoardListContainer;

@@ -13,12 +13,11 @@ export const getPosts = () => {
 }
 
 export const createPost = (postFormData, headers = {}) => {
-    
-    const response = axios.post(`http://52.231.101.140:8080/posts`, postFormData, {headers}).then(async (resolve) => {
-      return resolve.data;
-    });
-    console.log("response", response);
-    return response;
+  const response = axios.post(`http://52.231.101.140:8080/posts`, postFormData, {headers}).then(async (resolve) => {
+    return resolve.data;
+  });
+  console.log("response", response);
+  return response;
 }
 
 export const getNewToken = () => {
@@ -40,7 +39,6 @@ export const getNewToken = () => {
 }
 
 export const checkToken = (token = null) => {
-  
   if( token === null ) { // 발급
     console.log("토큰이 없습니다. 새로 발급받습니다.");
     return getNewToken();
@@ -65,3 +63,31 @@ export const checkToken = (token = null) => {
     }
   });
 }
+
+export const getChatroomsList = () => {
+  const response = axios.get("http://52.231.101.140:8080/chat/rooms")
+    .then((resolve) => {
+      return resolve.data;
+    })
+  return response;
+}
+
+export const createChatroom = (data, headers={}) => {
+  console.log("createChatroom", data);
+  const response = axios.post("http://52.231.101.140:8080/chat/room", {name: data})
+    .then((resolve) => {
+      return resolve.data;
+    })
+  return response;
+}
+
+export const getChatroom = (roomId) => {
+  const response = axios.get(`http://52.231.101.140:8080/chat/room/${roomId}`)
+    .then((resolve) => {
+      return resolve.data;
+    })
+  return response;
+  // axios.get('/chat/room/'+this.roomId).then(response => { this.room = response.data; });
+}
+
+// export const get
